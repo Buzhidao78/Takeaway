@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bzy.takeaway.mapper.ReviewVoteMapper">
+
+    <select id="selectByReviewIdAndUserId" resultType="com.bzy.takeaway.entity.ReviewVote">
+        SELECT * FROM review_vote 
+        WHERE review_id = #{reviewId} AND user_id = #{userId}
+    </select>
+
+</mapper>

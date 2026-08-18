@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bzy.takeaway.mapper.RiderMapper">
+
+    <!-- 物理删除骑手（忽略软删除） -->
+    <delete id="deletePhysical">
+        DELETE FROM rider WHERE id = #{id}
+    </delete>
+
+    <!-- 根据手机号查询骑手（忽略软删除） -->
+    <select id="selectByPhoneIgnoreDeleted" resultType="com.bzy.takeaway.entity.Rider">
+        SELECT * FROM rider WHERE phone = #{phone} LIMIT 1
+    </select>
+
+    <!-- 更新骑手手机号（忽略软删除） -->
+    <update id="updatePhoneIgnoreDeleted">
+        UPDATE rider SET phone = #{phone}, update_time = NOW() WHERE id = #{id}
+    </update>
+
+</mapper>

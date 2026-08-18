@@ -1,0 +1,7 @@
+package com.bzy.takeaway.mapper;
+
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.bzy.takeaway.entity.RiderLocation;
+
+public interface RiderLocationMapper extends BaseMapper<RiderLocation> {
+}

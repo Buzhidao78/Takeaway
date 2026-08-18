@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: bzy-takeaway
+  profiles:
+    active: dev
+
+# 通用配置（所有环境共享）
+file:
+  upload-path: ./uploads
+  access-prefix: /uploads/**
+
+# JWT
+jwt:
+  secret: bzy-takeaway-jwt-secret-key-2024-very-long-secret
+  expire-minutes: 1440
+
+mybatis-plus:
+  global-config:
+    db-config:
+      id-type: auto
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0

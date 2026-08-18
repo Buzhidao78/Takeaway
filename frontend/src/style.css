@@ -1,0 +1,107 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --primary: #ff6b35;
+  --primary-dark: #e55a2b;
+  --primary-gradient: linear-gradient(135deg, #ff6b35 0%, #ff8f65 100%);
+  --bg: #f5f7fa;
+  --card: #fff;
+  --text: #333;
+  --text-muted: #999;
+  --shadow-glow: 0 4px 16px rgba(255, 107, 53, 0.3);
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --text-primary: #333;
+  --text-secondary: #666;
+}
+
+html, body {
+  font-family: 'PingFang SC', 'Helvetica Neue', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  /* 方案 2：只在右侧预留滚动条空间，避免页面跳动 */
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+}
+
+#app {
+  height: 100%;
+}
+
+/* 页面容器保持原有最大宽度 */
+.page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+a { color: inherit; text-decoration: none; }
+.page { max-width: 1200px; margin: 0 auto; padding: 20px; }
+.el-button--primary { --el-button-bg-color: var(--primary); --el-button-border-color: var(--primary); --el-button-hover-bg-color: var(--primary-dark); --el-button-hover-border-color: var(--primary-dark); }
+.el-menu--horizontal .el-menu-item.is-active { color: var(--primary); border-bottom-color: var(--primary); }
+.store-card { transition: transform 0.2s, box-shadow 0.2s; }
+.store-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
+.dish-card { border-radius: 12px; overflow: hidden; background: #fff; }
+.cart-float { position: fixed; bottom: 80px; right: 24px; z-index: 100; }
+
+/* 全局滚动条样式 - 灰色 Chrome 风格（4px 宽度，白色背景圆角） */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F5F7FA;
+  border-radius: 0;
+  box-shadow: none;
+  margin: 0;
+  padding: 0;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #a0a0a0;
+  border-radius: 2px;
+  border: none;
+  box-shadow: none;
+  transition: background 0.2s;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #808080;
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: #606060;
+}
+
+/* 适配深色模式 */
+@media (prefers-color-scheme: dark) {
+  ::-webkit-scrollbar-track {
+    background: #F5F7FA;
+    box-shadow: none;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #606060;
+    box-shadow: none;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #808080;
+  }
+  
+  ::-webkit-scrollbar-thumb:active {
+    background: #a0a0a0;
+  }
+}
+
+/* 页面容器样式 */
+.page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}

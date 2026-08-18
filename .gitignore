@@ -1,0 +1,86 @@
+## Compiled class files
+target/
+*.class
+
+## IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+!.vscode/extensions.json
+
+## Logs
+*.log
+logs/
+
+## Database
+*.db
+*.sqlite
+
+## Uploads
+uploads/
+
+## Node.js
+node_modules/
+frontend/node_modules/
+frontend/dist/
+package-lock.json
+frontend/package-lock.json
+yarn.lock
+frontend/yarn.lock
+
+## Environment files
+.env
+.env.local
+.env.*.local
+*.env.local
+
+## Build artifacts
+*.jar
+bzy-takeaway-*.jar
+
+## Docker
+docker-compose.override.yml
+
+## OS files
+.DS_Store
+Thumbs.db
+
+## Maven
+.mvn/
+mvnw
+mvnw.cmd
+
+## Spring Boot
+src/main/resources/static/assets/
+
+## Temporary files
+temp_verify.js
+
+## Sensitive / personal files
+.env.prod
+.env.production
+面试准备.md
+LEARNING_PLAN.md
+
+## Deployment docs (contain sensitive server info)
+DEPLOYMENT_GUIDE.md
+DEPLOY_CHECKLIST.md
+
+## Local build scripts
+build.bat
+build-local.bat
+
+## Local Docker config
+docker-compose.local.yml
+
+## Duplicate API file (use product-review.js instead)
+frontend/src/api/productReview.js
+
+## Test page
+frontend/src/views/Test.vue
+
+## Build artifacts in static
+src/main/resources/static/index.html
+src/main/resources/static/favicon.svg

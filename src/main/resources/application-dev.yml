@@ -1,0 +1,79 @@
+# 开发环境配置
+server:
+  port: 8080
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
+spring:
+  mvc:
+    static-path-pattern: /static/**
+  web:
+    resources:
+      cache-period: 0  # 开发环境禁用静态资源缓存
+      static-locations: classpath:/static/
+      mvc-throw-exception-if-no-handler-found: true
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/bzy_takeaway?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: 123456
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      password:
+      database: 0
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+# 文件上传路径
+file:
+  upload-path: D:/git/code01/Project1/uploads
+  access-prefix: /uploads/**
+
+# Alipay sandbox configuration (disabled in dev, use mock payment)
+alipay:
+  enabled: false
+#  app-id: 9021000158677959
+#  private-key: MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCfofiJeklMTePBrC1m9nV9YaV7zFmdGCvGC2euVKGoVFd3O4yi/AVnp9Rxg5ppTM8WnxG3AgP7mmvFsWVPdLMTm1IUpVO509kKkNrGZ+T/e7jUnaTPpKdRcrZdNqVK9SNjMtcO03OSMfPTZjEXobNx0IvFYbkfqxKls9fwGUtcBcfY3lLqT2jKA0H0rniCc5IO+TnDEW21XC9iVdxF2c4aE08EVMTk45UesiEUA3wbOym2FzAYpe0zhNB2cyRPn1Vn2Dm8AOLL0WUyLcho67wLTIxuFIK3TrNgOwVHaWzKj++q2L1V2bG423d4VOlfsHmoTMF+pPbhPbQ+MIWq3TnFAgMBAAECggEAAeICMXTsymacyhsCyhUcG6d8MTKe1/iCA6r8xRSgd4DPK0vbg8yfL7LOEaywtI9AXg7wQY1XiK8wmDtYa5B/0DpjxHSSwT1bcQF2YyK0k8Lc0j0txXk2tAI7XmwXlQPBMBlYagdadJ38N0EcUSAKIsyH6YMWkOYOqT+uy1kxB1vRSAI8lm38ZL/jzlOzk6hZ9HPilzZwmRc5RcpRBwX/vLPbtrlJKeKZ6tC2YDzdhAHQpatArQGjNfinJT0mXse1QIyVBD6Mn4iDMRhgGH/3KVL9BZkq42rc3CDuxgg7XyRcO+zozn3kB6aVIzTbCTmJy5dzQYKqsI54qTZBBs3YnQKBgQDoSNAyv6oACx8e8eWln2Fsim8bCunhQJrT2IQKKsq0MqOYIgm13xR0zvjbqA45/c1NGQc8zLbpK7/OLErH3pRXQeUstOjktl7ZPxTcZhF6WSA/DgLXd8Qolo50ZJCyOpoPANo0N5fKd3UmhTSFzExeuYIdFYwVbec8pE7/C/ub0wKBgQCv7kTnUIqkcfbUczd4BofXwYd0ywWABt0OXpJLiQBHCwGgK9CPdny6gIeIAT00lDZWqFsDcEJmhP/reWsOo1sggWjDO5BA9EjozyRzLDq9yqFspI9a6NrtJnjvSIQlE9uXDE5wJaTAqNr18iKgfFmAOuGLQQzkW3CO424ye3zNBwKBgFfsj9pV0FyZ2RrWh43MqYzzTaEX3XWlBbYgo8JRdk8FSAVjBPfxzAV2/p3unAv5dQe07JdoCehy5fR9sYS8TLxGth/ZDrrcCUUEaroObJk6OUmE3TCAJiES9DM8icTdB8mcEfxn+q3pz89X5oyqy1GjuIuXx2GpKzk6HKjP+Vp/AoGAPa+aw0xvQFehRz6azV/k05bM6vugkxJVAgvQ2eFQkpheWo3iU9skwrP8UYi1sDDjmKDxQJRlA9NQdH0fN4O5mP0nAYVqAAxnYBH5YtS4SAG7df+BMEwDLzHVJ3lStDlxPlYXTqU0TkUmeSQMVh8jtp1upcgKQCt7nO5LnjHEQZMCgYB2UpUCLFRDMDTWYlG3URk9cTnmbM76vnYkUSuYYHFZHTkwA+EX08ihwgcxyaKrmFCm8pIiDZ13Rc2VJr2qIr8vPZbE/rUrL6JtBDzphLOaCl9eyfhlRO7smsSaSsTq9s5wBTJW1DbEFlnSY+hfOgAHJgYW/u+a6X0Fe2Vs/Ee/lw==
+#  alipay-public-key: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnoiff17D+RwKw/9hj/NBBjkeC5vvYtUBHsXX+zujVHj8ZkQ/2FjIWKTd96LqnXJPFysc8Kfj4nS/yj0es5eh+NcOoCdSYX572jv70rJRbZE/WVw/lC1Jj0Wi/LdQWAr2uA1Rf6/aCDavikTeMB5YW0FocFsTA4bFzjkS3ggJHLRYdfgWrCdxislh2kVre2xLYYceviVUYCtmEZVD4wvjwZJlE4tKUj5hiXyeKQrtYBR3p5oI5eH60WxQTkVP+ich1RB1I2bcVS012kT6rIDQpvx9SJpww/UZkrCspTfeY6bxfuOb3KCV03deamHmjZCJzh9XZpj+QyS1ulJlaqscqwIDAQAB
+#  gateway-url: https://openapi-sandbox.dl.alipaydev.com/gateway.do
+#  notify-url: http://wbbd3ab9.natappfree.cc/api/pay/alipay/notify
+#  return-url: http://wbbd3ab9.natappfree.cc/#/order/pay-result
+
+# 阿里云短信
+sms:
+  access-key-id: 
+  access-key-secret: 
+  sign-name: 
+  template-code: 
+  dev-mode: true
+
+# JWT
+jwt:
+  secret: bzy-takeaway-jwt-secret-key-2024-very-long-secret
+  expire-minutes: 1440
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      id-type: auto
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+
+logging:
+  level:
+    com.bzy: debug
+    org.springframework: info
+    org.springframework.web: DEBUG
+    org.springframework.web.servlet: DEBUG
+    org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping: TRACE

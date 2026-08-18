@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bzy.takeaway.mapper.SysUserMapper">
+
+    <!-- 物理删除用户（忽略软删除） -->
+    <delete id="deletePhysical">
+        DELETE FROM sys_user WHERE id = #{id}
+    </delete>
+
+    <!-- 根据ID查询用户（忽略软删除） -->
+    <select id="selectByIdIgnoreDeleted" resultType="com.bzy.takeaway.entity.SysUser">
+        SELECT * FROM sys_user WHERE id = #{id} LIMIT 1
+    </select>
+
+    <!-- 更新用户（忽略软删除） -->
+    <update id="updateByIdIgnoreDeleted">
+        UPDATE sys_user 
+        SET phone = #{user.phone},
+            password = #{user.password},
+            nickname = #{user.nickname},
+            role = #{user.role},
+            status = #{user.status},
+            deleted = #{user.deleted},
+            update_time = NOW()
+        WHERE id = #{user.id}
+    </update>
+
+</mapper>
