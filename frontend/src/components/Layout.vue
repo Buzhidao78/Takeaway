@@ -416,7 +416,8 @@ let notificationTimer = null
 function connectNotificationWebSocket() {
   if (!userStore.isLogin || !userStore.token) return
   
-  const wsBaseUrl = import.meta.env.VITE_WS_URL || 'ws://localhost:8080/ws'
+  const proto = location.protocol === 'https:' ? 'wss' : 'ws'
+  const wsBaseUrl = `${proto}://${location.host}/ws`
   const wsUrl = `${wsBaseUrl}/notification?token=${userStore.token}`
   notificationWs = new WebSocket(wsUrl)
   

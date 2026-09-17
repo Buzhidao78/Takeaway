@@ -74,6 +74,14 @@ build-local.bat
 
 ## Local Docker config
 docker-compose.local.yml
+docker-compose.override.yml
+
+## Docker images (large, machine-generated)
+takeaway-images.tar
+takeaway-images.tar.gz
+
+## IDE tooling docs (contains server IPs)
+.trae/
 
 ## Duplicate API file (use product-review.js instead)
 frontend/src/api/productReview.js

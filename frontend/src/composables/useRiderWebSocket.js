@@ -1,7 +1,11 @@
 import { ref } from 'vue'
 import { useUserStore } from '@/stores/user'
 
-const WS_URL = import.meta.env.VITE_WS_URL || 'ws://localhost:8080/ws/rider'
+// 动态生成 WebSocket 地址，基于当前 host（本地/服务器共用），经 nginx 反代 /ws
+function buildWsUrl() {
+  const proto = location.protocol === 'https:' ? 'wss' : 'ws'
+  return `${proto}://${location.host}/ws/rider`
+}
 
 export function useRiderWebSocket() {
   const userStore = useUserStore()
@@ -15,7 +19,7 @@ export function useRiderWebSocket() {
     const token = localStorage.getItem('token')
     if (!token) return
 
-    ws = new WebSocket(`${WS_URL}?token=${token}`)
+    ws = new WebSocket(`${buildWsUrl()}?token=${token}`)
 
     ws.onopen = () => {
       console.log('WebSocket 连接成功')

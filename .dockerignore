@@ -1,0 +1,14 @@
+# 后端镜像构建上下文排除
+frontend/
+node_modules/
+target/
+uploads/
+sql/
+config/
+.git/
+.idea/
+.vscode/
+*.bat
+*.sh
+*.md
+PYTHON_VENV

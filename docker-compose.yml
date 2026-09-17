@@ -1,7 +1,7 @@
 services:
-  # MySQL 数据库
+  # MySQL 数据库（不向宿主暴露端口，仅容器网络内供 backend 访问）
   mysql:
-    image: mysql:8.0
+    image: docker.1panel.live/library/mysql:8.0
     container_name: takeaway-mysql
     restart: always
     environment:
@@ -11,10 +11,8 @@ services:
       MYSQL_COLLATION_SERVER: utf8mb4_unicode_ci
       TZ: Asia/Shanghai
     volumes:
-      - mysql-data:/var/lib/mysql
+      - takeaway_mysql_data:/var/lib/mysql
       - ./sql:/docker-entrypoint-initdb.d
-    ports:
-      - "3307:3306"
     command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --default-authentication-plugin=mysql_native_password
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD:-Prod@2024Root#Secure9527}"]
@@ -22,25 +20,23 @@ services:
       timeout: 5s
       retries: 5
 
-  # Redis 缓存
+  # Redis 缓存（不向宿主暴露端口）
   redis:
-    image: redis:alpine
+    image: docker.1panel.live/library/redis:alpine
     container_name: takeaway-redis
     restart: always
-    ports:
-      - "6379:6379"
     volumes:
-      - redis-data:/data
-    command: redis-server --appendonly yes --requirepass Redis@2024Secure#7788
+      - takeaway_redis_data:/data
+    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD:-Redis@2024Secure#7788}
     healthcheck:
       test: ["CMD", "redis-cli", "-a", "Redis@2024Secure#7788", "ping"]
       interval: 10s
       timeout: 5s
       retries: 5
 
-  # 后端 Spring Boot (包含前端静态文件)
+  # 后端 Spring Boot API（宿主 8081 → 容器 8080）
   backend:
-    image: openjdk:17-slim
+    image: takeaway-backend:v1
     container_name: takeaway-backend
     restart: always
     depends_on:
@@ -61,19 +57,26 @@ services:
       - REDIS_PASSWORD=${REDIS_PASSWORD:-Redis@2024Secure#7788}
       - TZ=Asia/Shanghai
     volumes:
-      - ./bzy-takeaway-1.0.0.jar:/app/app.jar
       - ./uploads:/app/uploads
-      - ./config:/app/config
     ports:
-      - "8080:8080"
-    command: java -Dfile.encoding=UTF-8 -Dsun.jnu.encoding=UTF-8 -Dspring.config.additional-location=/app/config/ -jar app.jar
+      - "8081:8080"
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080"]
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://localhost:8080"]
       interval: 30s
       timeout: 10s
       retries: 3
       start_period: 60s
 
+  # 前端 Nginx（宿主 8091 → 容器 80，反代 /api、/uploads、/ws 到 backend）
+  frontend:
+    image: takeaway-frontend:v1
+    container_name: takeaway-frontend
+    restart: always
+    depends_on:
+      - backend
+    ports:
+      - "8091:80"
+
 volumes:
-  mysql-data:
-  redis-data:
+  takeaway_mysql_data:
+  takeaway_redis_data:

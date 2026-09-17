@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [vue()],
   base: '/',
   build: {
-    outDir: '../src/main/resources/static',
+    outDir: resolve(__dirname, 'dist'),
     emptyOutDir: true,
   },
   server: {
